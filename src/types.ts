@@ -27,7 +27,7 @@ export type Family = {
 
 export type Font = {
   subset?: string
-  name: string
+  family: string
   style: FontStyle
   weight: FontWeight
   display?: FontDisplay

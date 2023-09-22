@@ -1,13 +1,13 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
-import { resolve, dirname } from 'node:path'
-import { ofetch } from 'ofetch'
 import { createRegExp, charIn, charNotIn, exactly, whitespace } from 'magic-regexp'
+import { ofetch } from 'ofetch'
+import { resolve, dirname } from 'pathe'
 import { Font, FontFormat, FontSource, FontStyle, FontWeight } from './types'
 
 export function generateCSS (fonts: Font[]) {
   return fonts.map((font) => {
     const declaration = {
-      'font-family': `'${font.name}'`,
+      'font-family': `'${font.family}'`,
       'font-style': font.style,
       'font-weight': font.weight,
       'font-display': font.display,
@@ -35,7 +35,7 @@ export function parseFonts (css: string) {
 
     fonts.push({
       subset: subsets.at(fonts.length),
-      name: withoutQuotes(matchContent.match(FONT_FAMILY_RE)?.groups.fontFamily?.split(',')[0] || ''),
+      family: withoutQuotes(matchContent.match(FONT_FAMILY_RE)?.groups.fontFamily?.split(',')[0] || ''),
       style: withoutQuotes(matchContent.match(FONT_STYLE_RE)?.groups.fontStyle || 'normal') as FontStyle,
       weight: parseInt(withoutQuotes(matchContent.match(FONT_WEIGHT_RE)?.groups.fontWeight || '400')) as FontWeight,
       src: matchContent.match(FONT_SRC_RE)?.groups.src?.split(',').map(fontSource => ({
@@ -68,7 +68,7 @@ export async function fetchFont (font: Font, outputDir: string) {
       continue
     }
 
-    const fileName = `${font.name}-${font.style}-${font.weight}${font.subset ? '-' + font.subset : ''}.${format}`
+    const fileName = `${font.family}-${font.style}-${font.weight}${font.subset ? '-' + font.subset : ''}.${format}`
     const buffer = Buffer.from(response?._data)
     const fontPath = resolve(outputDir, fileName)
 

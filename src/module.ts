@@ -1,4 +1,8 @@
+import { pathToFileURL } from 'node:url'
 import { defineNuxtModule, useLogger, addTemplate, addPluginTemplate, resolvePath } from '@nuxt/kit'
+import { getMetricsForFamily, generateFontFace, readMetrics, generateFallbackName } from 'fontaine'
+import { join } from 'pathe'
+import { hasProtocol } from 'ufo'
 import { name, version } from '../package.json'
 import { providers } from './providers'
 import type { Providers, Family, Font } from './types'
@@ -32,7 +36,7 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     const outputDir = await resolvePath('node_modules/.cache/nuxt-fonts')
-    const fonts: Font[] = []
+    let css = ''
 
     for (const family of options.families) {
       const providerName = family.provider ?? options.provider
@@ -44,6 +48,7 @@ export default defineNuxtModule<ModuleOptions>({
       }
 
       const providerFonts = await (providers[providerName])(family)
+      const fonts: Font[] = []
 
       for (const font of providerFonts) {
         if (family.subsets && font.subset && !family.subsets.includes(font.subset)) {
@@ -52,13 +57,38 @@ export default defineNuxtModule<ModuleOptions>({
 
         fonts.push({
           ...font,
-          name: family.as || font.name,
+          family: family.as || font.family,
           src: await fetchFont(font, outputDir)
         })
       }
-    }
 
-    const css = generateCSS(fonts)
+      css += generateCSS(fonts)
+
+      const fallbacks = family.fallbacks || options.fallbacks || []
+
+      if (fallbacks.length) {
+        let metrics = await getMetricsForFamily(family.name)
+
+        if (!metrics && fonts.length && !hasProtocol(fonts[0].src[0].url)) {
+          metrics = await readMetrics(pathToFileURL(join(outputDir, fonts[0].src[0].url)))
+        }
+
+        if (!metrics) {
+          logger.warn('Could not find metrics for font', family.name)
+          continue
+        }
+
+        css += '\n'
+
+        for (const fallback of fallbacks) {
+          css += generateFontFace(metrics, {
+            name: generateFallbackName(family.name),
+            font: fallback,
+            metrics: (await getMetricsForFamily(fallback))!
+          })
+        }
+      }
+    }
 
     if (options.inline) {
       addPluginTemplate({
