@@ -35,6 +35,7 @@
     "fontaine": "^0.4.1",
     "magic-regexp": "^0.7.0",
     "ofetch": "^1.3.3",
+    "pathe": "^1.1.1",
     "ufo": "^1.3.0"
   },
   "devDependencies": {
