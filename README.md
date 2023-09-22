@@ -1,4 +1,4 @@
-# @nuxt/fonts
+# nuxt-fonts
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
@@ -12,37 +12,37 @@
 
 ## Setup
 
-1. Add `@nuxt/fonts` dependency to your project
+1. Add `nuxt-fonts` dependency to your project
 
 With `pnpm`
 
 ```bash
-pnpm add @nuxt/fonts
+pnpm add nuxt-fonts
 ```
 
 Or, with `yarn`
 
 ```bash
-yarn add @nuxt/fonts
+yarn add nuxt-fonts
 ```
 
 Or, with `npm`
 
 ```bash
-npm install @nuxt/fonts
+npm install nuxt-fonts
 ```
 
-2. Add `@nuxt/fonts` to the `modules` section of `nuxt.config.ts`
+2. Add `nuxt-fonts` to the `modules` section of `nuxt.config.ts`
 
 ```js
 export default defineNuxtConfig({
   modules: [
     // Simple usage
-    "@nuxt/fonts",
+    "nuxt-fonts",
 
     // With options
     [
-      "@nuxt/fonts",
+      "nuxt-fonts",
       {
         /* module options */
       },
@@ -55,7 +55,7 @@ export default defineNuxtConfig({
 
 ```js
 export default defineNuxtConfig({
-  modules: ["@nuxt/fonts"],
+  modules: ["nuxt-fonts"],
   fonts: {
     /* module options */
   },
@@ -105,7 +105,7 @@ export default {
 
 You can contribute to this module online with CodeSandBox:
 
-[![Edit @nuxt/fonts](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/nuxt/fonts/?fontsize=14&hidenavigation=1&theme=dark)
+[![Edit nuxt-fonts](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/ricardogobbosouza/nuxt-fonts/?fontsize=14&hidenavigation=1&theme=dark)
 
 Or locally:
 
@@ -123,13 +123,13 @@ Copyright (c) Nuxt
 
 <!-- Badges -->
 
-[npm-version-src]: https://img.shields.io/npm/v/@nuxt/fonts/latest.svg
-[npm-version-href]: https://npmjs.com/package/@nuxt/fonts
-[npm-downloads-src]: https://img.shields.io/npm/dt/@nuxtjs/fonts.svg
-[npm-downloads-href]: https://npmjs.com/package/@nuxt/fonts
-[github-actions-ci-src]: https://github.com/nuxt/fonts/workflows/ci/badge.svg
-[github-actions-ci-href]: https://github.com/nuxt/fonts/actions?query=workflow%3Aci
-[codecov-src]: https://img.shields.io/codecov/c/github/nuxt/fonts.svg
-[codecov-href]: https://codecov.io/gh/nuxt/fonts
-[license-src]: https://img.shields.io/npm/l/@nuxt/fonts.svg
-[license-href]: https://npmjs.com/package/@nuxt/fonts
+[npm-version-src]: https://img.shields.io/npm/v/nuxt-fonts/latest.svg
+[npm-version-href]: https://npmjs.com/package/nuxt-fonts
+[npm-downloads-src]: https://img.shields.io/npm/dt/nuxtjs-fonts.svg
+[npm-downloads-href]: https://npmjs.com/package/nuxt-fonts
+[github-actions-ci-src]: https://github.com/ricardogobbosouza/nuxt-fonts/workflows/ci/badge.svg
+[github-actions-ci-href]: https://github.com/ricardogobbosouza/nuxt-fonts/actions?query=workflow%3Aci
+[codecov-src]: https://img.shields.io/codecov/c/github/ricardogobbosouza/nuxt-fonts.svg
+[codecov-href]: https://codecov.io/gh/ricardogobbosouza/nuxt-fonts
+[license-src]: https://img.shields.io/npm/l/nuxt-fonts.svg
+[license-href]: https://npmjs.com/package/nuxt-fonts

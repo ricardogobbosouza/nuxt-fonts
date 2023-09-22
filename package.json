@@ -1,8 +1,8 @@
 {
-  "name": "@nuxt/fonts",
+  "name": "nuxt-fonts",
   "version": "0.0.1",
   "description": "Nuxt Fonts Module",
-  "repository": "nuxt/fonts",
+  "repository": "ricardogobbosouza/nuxt-fonts",
   "license": "MIT",
   "contributors": [
     "Ricardo Gobbo de Souza <ricardogobbosouza@yahoo.com.br>"
